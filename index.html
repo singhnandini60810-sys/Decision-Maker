@@ -2,6 +2,9 @@
 <html>
 <head>
 <title>Random Decision Maker</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -10,6 +13,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
 
 .container {
@@ -30,6 +34,13 @@ textarea {
     height: 80px;
     padding: 8px;
     resize: none;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+textarea:focus {
+    outline: none;
+    border: 2px solid #4facfe;
 }
 
 button {
@@ -42,6 +53,7 @@ button {
     color: white;
     font-weight: bold;
     border-radius: 6px;
+    font-size: 15px;
 }
 
 button:hover {
@@ -63,12 +75,15 @@ button:hover {
     <p>Enter options separated by commas</p>
 
     <textarea id="options" placeholder="Pizza, Burger, Momos"></textarea>
+
     <button onclick="pickOption()">Pick Random</button>
+    <button onclick="clearOptions()">Clear</button>
 
     <div class="result" id="result"></div>
 </div>
 
 <script>
+
 function pickOption() {
     var input = document.getElementById("options").value;
     var resultDiv = document.getElementById("result");
@@ -78,22 +93,46 @@ function pickOption() {
         return;
     }
 
-    var options = input.split(",").map(function(item) {
-        return item.trim();
-    }).filter(function(item) {
-        return item !== "";
-    });
+    var options = input.split(",")
+        .map(function(item) {
+            return item.trim();
+        })
+        .filter(function(item) {
+            return item !== "";
+        });
 
     if (options.length === 0) {
         resultDiv.innerHTML = "Enter valid options!";
         return;
     }
 
-    var randomIndex = Math.floor(Math.random() * options.length);
-    var chosen = options[randomIndex];
+    var randomIndex;
 
-    resultDiv.innerHTML = "🎉 Selected: " + chosen;
+    var interval = setInterval(function() {
+        randomIndex = Math.floor(Math.random() * options.length);
+        resultDiv.innerHTML = "Choosing: " + options[randomIndex];
+    }, 100);
+
+    setTimeout(function() {
+        clearInterval(interval);
+        resultDiv.innerHTML = "🎉 Selected: " + options[randomIndex];
+    }, 1500);
 }
+
+
+function clearOptions() {
+    document.getElementById("options").value = "";
+    document.getElementById("result").innerHTML = "";
+}
+
+
+document.getElementById("options").addEventListener("keydown", function(event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        pickOption();
+    }
+});
+
 </script>
 
 </body>
