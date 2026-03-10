@@ -1,18 +1,28 @@
-# Decision-Maker
-A simple web app that helps users make random decisions. Enter multiple options separated by commas, and the app instantly selects one at random using JavaScript, with a clean, responsive interface.
-#  Random Decision Maker
+# Random Decision Maker
 
-A simple and interactive web app that helps users make quick decisions by randomly selecting one option from a list.
-
+Random Decision Maker is a simple web application that helps users choose between multiple options.  
+You just enter options separated by commas and the app randomly selects one for you.
 
 ## Features
 
-- Enter multiple options separated by commas
-- Randomly selects one option instantly
-- Clean and responsive user interface
-- Works fully offline
-- Built using pure HTML, CSS, and JavaScript
+- Randomly selects one option from a list
+- Supports multiple options separated by commas
+- Animated selection effect
+- Clear button to reset inputs
+- Enter key support for quick selection
+- Responsive design for desktop and mobile
 
+## How to Use
+
+1. Open the application in your browser.
+2. Enter options separated by commas.
+
+Example:
+Pizza, Burger, Momos, Pasta
+
+3. Click the **Pick Random** button.
+4. The application will randomly choose one option.
+5. Use the **Clear** button to reset the input.
 
 ## Technologies Used
 
@@ -20,30 +30,14 @@ A simple and interactive web app that helps users make quick decisions by random
 - CSS
 - JavaScript
 
+## Project Structure
 
-## How to Use
-1. Open `index.html` in your browser.
-2. Enter options separated by commas.
-   Example:
-3. Click **Pick Random**.
-4. The app will randomly select one option.
+## Purpose
 
+This project is designed as a beginner-friendly JavaScript project to demonstrate:
 
-## How It Works
+- DOM manipulation
+- Event handling
+- Random number generation
+- Basic UI design
 
-- User input is split into an array using commas.
-- JavaScript generates a random index.
-- One option is selected and displayed instantly.
-
-##  Future Improvements
-
-- Add spinning animation before selection
-- Add sound effects
-- Add dark mode
-- Show history of previous decisions
-- Remove selected option automatically
-
-
-##  Author
-
-Created by Nandini Singh
