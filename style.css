@@ -1,0 +1,38 @@
+body{
+    font-family: Arial;
+    background: linear-gradient(135deg,#4facfe,#00f2fe);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    text-align:center;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    width:450px;
+}
+
+canvas{
+    margin:20px 0;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    background:#4facfe;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+input{
+    padding:8px;
+}
+
+ul{
+    list-style:none;
+    padding:0;
+}
