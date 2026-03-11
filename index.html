@@ -1,139 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Random Decision Maker</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.container {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    width: 350px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-h2 {
-    margin-bottom: 15px;
-}
-
-textarea {
-    width: 100%;
-    height: 80px;
-    padding: 8px;
-    resize: none;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-textarea:focus {
-    outline: none;
-    border: 2px solid #4facfe;
-}
-
-button {
-    margin-top: 10px;
-    padding: 10px;
-    width: 100%;
-    cursor: pointer;
-    border: none;
-    background: #4facfe;
-    color: white;
-    font-weight: bold;
-    border-radius: 6px;
-    font-size: 15px;
-}
-
-button:hover {
-    background: #008cff;
-}
-
-.result {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-}
-</style>
+<title>Decision Wheel</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="container">
-    <h2>🎲 Decision Maker</h2>
-    <p>Enter options separated by commas</p>
+    <h1>Decision Wheel</h1>
 
-    <textarea id="options" placeholder="Pizza, Burger, Momos"></textarea>
+    <canvas id="wheel" width="400" height="400"></canvas>
 
-    <button onclick="pickOption()">Pick Random</button>
-    <button onclick="clearOptions()">Clear</button>
+    <button id="spinBtn">SPIN</button>
 
-    <div class="result" id="result"></div>
+    <div class="input-area">
+        <input type="text" id="optionInput" placeholder="Enter option">
+        <button onclick="addOption()">Add</button>
+    </div>
+
+    <ul id="optionList"></ul>
+
+    <h2 id="result"></h2>
 </div>
 
-<script>
-
-function pickOption() {
-    var input = document.getElementById("options").value;
-    var resultDiv = document.getElementById("result");
-
-    if (input.trim() === "") {
-        resultDiv.innerHTML = "Please enter some options!";
-        return;
-    }
-
-    var options = input.split(",")
-        .map(function(item) {
-            return item.trim();
-        })
-        .filter(function(item) {
-            return item !== "";
-        });
-
-    if (options.length === 0) {
-        resultDiv.innerHTML = "Enter valid options!";
-        return;
-    }
-
-    var randomIndex;
-
-    var interval = setInterval(function() {
-        randomIndex = Math.floor(Math.random() * options.length);
-        resultDiv.innerHTML = "Choosing: " + options[randomIndex];
-    }, 100);
-
-    setTimeout(function() {
-        clearInterval(interval);
-        resultDiv.innerHTML = "🎉 Selected: " + options[randomIndex];
-    }, 1500);
-}
-
-
-function clearOptions() {
-    document.getElementById("options").value = "";
-    document.getElementById("result").innerHTML = "";
-}
-
-
-document.getElementById("options").addEventListener("keydown", function(event) {
-    if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault();
-        pickOption();
-    }
-});
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
