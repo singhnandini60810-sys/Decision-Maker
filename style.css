@@ -1,49 +1,73 @@
 body{
-font-family: Arial;
-background: linear-gradient(135deg,#4facfe,#00f2fe);
+font-family:Arial;
+background:linear-gradient(135deg,#4facfe,#00f2fe);
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
 }
 
 .container{
-background:white;
+background:#eaeaea;
 padding:30px;
-border-radius:10px;
+border-radius:12px;
+width:420px;
 text-align:center;
+box-shadow:0 6px 20px rgba(0,0,0,0.2);
+}
+
+textarea{
+width:100%;
+height:90px;
+border-radius:8px;
+border:2px solid #6ea8fe;
+padding:10px;
+font-size:15px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+margin-top:12px;
+padding:12px;
+border:none;
+border-radius:8px;
+font-size:16px;
+background:#5fa2e0;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#4a8fce;
+}
+
+.result{
+margin-top:15px;
+font-size:20px;
+font-weight:bold;
 }
 
 .wheel-container{
 position:relative;
-width:400px;
-margin:auto;
+width:320px;
+margin:20px auto;
 }
 
 canvas{
 border-radius:50%;
-transition: transform 0.1s linear;
+box-shadow:0 4px 10px rgba(0,0,0,0.25);
 }
 
 .arrow{
 width:0;
 height:0;
-border-left:20px solid transparent;
-border-right:20px solid transparent;
-border-top:40px solid red;
+border-left:18px solid transparent;
+border-right:18px solid transparent;
+border-top:35px solid red;
 position:absolute;
 left:50%;
 transform:translateX(-50%);
-top:-10px;
-z-index:10;
-}
-
-button{
-margin-top:20px;
-padding:10px 20px;
-background:#4facfe;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
+top:-8px;
+z-index:5;
 }
