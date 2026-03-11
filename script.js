@@ -1,22 +1,20 @@
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
-let options = ["Pizza","Movie","Study","Game"];
+let options = ["Pizza","Movie","Study","Game","Sleep","Code"];
 
-let startAngle = 0;
-let arc;
-let spinVelocity = 0;
+let currentRotation = 0;
+let velocity = 0;
 let spinning = false;
 
 function drawWheel(){
 
-ctx.clearRect(0,0,400,400);
+const size = options.length;
+const arc = (Math.PI * 2) / size;
 
-arc = Math.PI * 2 / options.length;
+for(let i=0;i<size;i++){
 
-for(let i=0;i<options.length;i++){
-
-let angle = startAngle + i*arc;
+let angle = i * arc;
 
 ctx.beginPath();
 ctx.moveTo(200,200);
@@ -25,84 +23,51 @@ ctx.fillStyle = `hsl(${i*60},70%,60%)`;
 ctx.fill();
 
 ctx.save();
+
 ctx.translate(200,200);
 ctx.rotate(angle + arc/2);
 
 ctx.fillStyle="black";
 ctx.font="16px Arial";
 ctx.textAlign="right";
+
 ctx.fillText(options[i],170,10);
 
 ctx.restore();
 }
 }
 
+drawWheel();
+
 function spin(){
 
 if(spinning) return;
 
-spinVelocity = Math.random()*0.3 + 0.35;
+velocity = Math.random()*40 + 40;
 spinning = true;
 
-requestAnimationFrame(rotate);
+requestAnimationFrame(animate);
 }
 
-function rotate(){
+function animate(){
 
-startAngle += spinVelocity;
+velocity *= 0.97;
 
-spinVelocity *= 0.985;   // friction (slow down)
+currentRotation += velocity;
 
-drawWheel();
+canvas.style.transform =
+`rotate(${currentRotation}deg)`;
 
-if(spinVelocity < 0.002){
+if(velocity > 0.3){
+
+requestAnimationFrame(animate);
+
+}else{
 
 spinning=false;
-showResult();
-return;
+
+}
 }
 
-requestAnimationFrame(rotate);
-}
-
-function showResult(){
-
-let degrees = startAngle * 180 / Math.PI + 90;
-let arcDeg = arc * 180 / Math.PI;
-
-let index = Math.floor((360 - degrees % 360) / arcDeg);
-
-document.getElementById("result").innerText =
-"Result: " + options[index];
-}
-
-function addOption(){
-
-let input = document.getElementById("optionInput");
-
-if(input.value.trim()=="") return;
-
-options.push(input.value);
-
-input.value="";
-
-updateList();
-drawWheel();
-}
-
-function updateList(){
-
-let list=document.getElementById("optionList");
-list.innerHTML="";
-
-options.forEach(o=>{
-let li=document.createElement("li");
-li.innerText=o;
-list.appendChild(li);
-});
-}
-
-document.getElementById("spinBtn").onclick = spin;
-
-updateList();
-drawWheel();
+document.getElementById("spinBtn")
+.addEventListener("click",spin);
