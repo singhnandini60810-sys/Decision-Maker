@@ -12,13 +12,17 @@ background:white;
 padding:30px;
 border-radius:10px;
 text-align:center;
-width:460px;
 }
 
-.wheel-wrapper{
+.wheel-container{
 position:relative;
 width:400px;
 margin:auto;
+}
+
+canvas{
+border-radius:50%;
+transition: transform 0.1s linear;
 }
 
 .arrow{
@@ -34,26 +38,12 @@ top:-10px;
 z-index:10;
 }
 
-canvas{
-border-radius:50%;
-}
-
 button{
+margin-top:20px;
 padding:10px 20px;
-border:none;
 background:#4facfe;
 color:white;
+border:none;
 border-radius:5px;
 cursor:pointer;
-margin-top:15px;
-}
-
-input{
-padding:8px;
-margin-top:10px;
-}
-
-ul{
-list-style:none;
-padding:0;
 }
