@@ -1,73 +1,113 @@
-const canvas = document.getElementById("wheel");
-const ctx = canvas.getContext("2d");
+const canvas=document.getElementById("wheel");
+const ctx=canvas.getContext("2d");
 
-let options = ["Pizza","Movie","Study","Game","Sleep","Code"];
-
-let currentRotation = 0;
-let velocity = 0;
-let spinning = false;
+let options=[];
+let rotation=0;
+let velocity=0;
+let spinning=false;
 
 function drawWheel(){
 
-const size = options.length;
-const arc = (Math.PI * 2) / size;
+ctx.clearRect(0,0,320,320);
 
-for(let i=0;i<size;i++){
+if(options.length===0) return;
 
-let angle = i * arc;
+const arc=(Math.PI*2)/options.length;
+
+options.forEach((opt,i)=>{
+
+let angle=i*arc;
 
 ctx.beginPath();
-ctx.moveTo(200,200);
-ctx.arc(200,200,200,angle,angle+arc);
-ctx.fillStyle = `hsl(${i*60},70%,60%)`;
+ctx.moveTo(160,160);
+ctx.arc(160,160,160,angle,angle+arc);
+
+ctx.fillStyle=`hsl(${i*60},70%,60%)`;
 ctx.fill();
 
 ctx.save();
 
-ctx.translate(200,200);
-ctx.rotate(angle + arc/2);
+ctx.translate(160,160);
+ctx.rotate(angle+arc/2);
 
 ctx.fillStyle="black";
-ctx.font="16px Arial";
 ctx.textAlign="right";
+ctx.font="14px Arial";
 
-ctx.fillText(options[i],170,10);
+ctx.fillText(opt,140,5);
 
 ctx.restore();
-}
-}
 
-drawWheel();
+});
+
+}
 
 function spin(){
 
-if(spinning) return;
+if(spinning || options.length===0) return;
 
-velocity = Math.random()*40 + 40;
-spinning = true;
+velocity=Math.random()*40+35;
+
+spinning=true;
 
 requestAnimationFrame(animate);
+
 }
 
 function animate(){
 
-velocity *= 0.97;
+velocity*=0.97;
 
-currentRotation += velocity;
+rotation+=velocity;
 
-canvas.style.transform =
-`rotate(${currentRotation}deg)`;
+canvas.style.transform=`rotate(${rotation}deg)`;
 
-if(velocity > 0.3){
+if(velocity>0.3){
 
 requestAnimationFrame(animate);
 
 }else{
 
 spinning=false;
+showResult();
 
 }
+
 }
 
-document.getElementById("spinBtn")
-.addEventListener("click",spin);
+function showResult(){
+
+const arc=360/options.length;
+
+let deg=(rotation%360);
+
+let index=Math.floor((360-deg)/arc)%options.length;
+
+document.getElementById("result").innerText=
+"🎉 Selected: "+options[index];
+
+}
+
+document.getElementById("spinBtn").onclick=()=>{
+
+const text=document.getElementById("optionsInput").value;
+
+options=text.split(",").map(x=>x.trim()).filter(x=>x);
+
+drawWheel();
+
+spin();
+
+};
+
+document.getElementById("clearBtn").onclick=()=>{
+
+document.getElementById("optionsInput").value="";
+options=[];
+drawWheel();
+
+document.getElementById("result").innerText="Selected: -";
+
+};
+
+drawWheel();
