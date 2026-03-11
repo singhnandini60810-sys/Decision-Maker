@@ -1,16 +1,20 @@
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
-let options = [];
+const options = [
+"Pizza",
+"Movie",
+"Study",
+"Game",
+"Sleep",
+"Code"
+];
+
 let rotation = 0;
 let velocity = 0;
 let spinning = false;
 
 function drawWheel(){
-
-ctx.clearRect(0,0,320,320);
-
-if(options.length === 0) return;
 
 const arc = (Math.PI * 2) / options.length;
 
@@ -26,12 +30,14 @@ ctx.fillStyle = `hsl(${i*60},70%,60%)`;
 ctx.fill();
 
 ctx.save();
+
 ctx.translate(160,160);
 ctx.rotate(angle + arc/2);
 
 ctx.fillStyle="black";
 ctx.textAlign="right";
 ctx.font="14px Arial";
+
 ctx.fillText(opt,140,5);
 
 ctx.restore();
@@ -41,7 +47,7 @@ ctx.restore();
 
 function spin(){
 
-if(spinning || options.length === 0) return;
+if(spinning) return;
 
 velocity = Math.random()*40 + 35;
 spinning = true;
@@ -63,43 +69,11 @@ requestAnimationFrame(animate);
 }else{
 
 spinning = false;
-showResult();
 
 }
+
 }
 
-function showResult(){
-
-const slice = 360 / options.length;
-
-/* arrow is at top (90deg adjustment) */
-let adjusted = (rotation + 90) % 360;
-
-let index = Math.floor((360 - adjusted) / slice) % options.length;
-
-document.getElementById("result").innerText =
-"🎉 Selected: " + options[index];
-}
-
-document.getElementById("spinBtn").onclick = () => {
-
-const text = document.getElementById("optionsInput").value;
-
-options = text.split(",").map(x => x.trim()).filter(x => x);
-
-drawWheel();
-spin();
-
-};
-
-document.getElementById("clearBtn").onclick = () => {
-
-document.getElementById("optionsInput").value="";
-options=[];
-drawWheel();
-
-document.getElementById("result").innerText="Selected: -";
-
-};
+document.getElementById("spinBtn").onclick = spin;
 
 drawWheel();
