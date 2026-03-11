@@ -8,20 +8,28 @@
 <body>
 
 <div class="container">
-    <h1>Decision Wheel</h1>
 
-    <canvas id="wheel" width="400" height="400"></canvas>
+<h1>Decision Wheel</h1>
 
-    <button id="spinBtn">SPIN</button>
+<div class="wheel-wrapper">
 
-    <div class="input-area">
-        <input type="text" id="optionInput" placeholder="Enter option">
-        <button onclick="addOption()">Add</button>
-    </div>
+<div class="arrow"></div>
 
-    <ul id="optionList"></ul>
+<canvas id="wheel" width="400" height="400"></canvas>
 
-    <h2 id="result"></h2>
+</div>
+
+<button id="spinBtn">SPIN</button>
+
+<div class="input-area">
+<input id="optionInput" placeholder="Add option">
+<button onclick="addOption()">Add</button>
+</div>
+
+<ul id="optionList"></ul>
+
+<h2 id="result"></h2>
+
 </div>
 
 <script src="script.js"></script>
