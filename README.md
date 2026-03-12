@@ -1,5 +1,5 @@
 # Random Decision Maker
-
+:https://singhnandini60810-sys.github.io/Decision-Maker/
 Random Decision Maker is a simple web application that helps users choose between multiple options.  
 You just enter options separated by commas and the app randomly selects one for you.
 
