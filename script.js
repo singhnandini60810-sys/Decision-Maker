@@ -1,6 +1,5 @@
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
-
 let options = [];
 let rotation = 0;
 let velocity = 0;
